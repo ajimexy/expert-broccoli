@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>HOROR GATE</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;height:100%;background:#000;font-family:'Creepster',cursive;color:#fff;overflow:hidden}
+  #bgSlide{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.7;transition:opacity 1s}
+  .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:-1}
+
+  .frame{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:min(70vw, 360px);
+    border:6px solid #8b0000;
+    box-shadow:0 0 30px #8b0000,inset 0 0 30px rgba(139,0,0,.5);
+    animation:flicker 4s infinite;
+  }
+  .frame img{width:100%;display:block;filter:grayscale(80%) brightness(70%) contrast(120%)}
+  .label{margin-top:8px;text-align:center;font-size:clamp(18px,2.8vw,26px);letter-spacing:1px;color:#fff;text-shadow:0 0 8px #fff, 0 0 16px #8b0000}
+
+  #threatBox{
+    position:absolute;bottom:120px;left:50%;transform:translateX(-50%);
+    width:90%;max-width:500px;
+    text-align:center;
+    font-size:clamp(20px,3vw,28px);
+    color:#ff0000;
+    text-shadow:0 0 8px #ff0000;
+    animation:bloodFlicker 1.2s infinite;
+  }
+  @keyframes bloodFlicker{
+    0%,100%{opacity:1;text-shadow:0 0 8px #ff0000}
+    50%{opacity:.2;text-shadow:0 0 25px #ff0000}
+  }
+
+  #errorBox{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+    font-size:clamp(28px,4vw,42px);
+    color:#ff0000;
+    text-shadow:0 0 10px #ff0000;
+    transition:transform .2s ease;
+    z-index:9999;
+  }
+
+  .flying{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:50px;letter-spacing:4px;color:#8b0000;text-shadow:0 0 10px #ff0000;cursor:pointer;transition:.1s linear;z-index:15}
+
+  #spotifyMuteBtn{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);border:0;border-radius:50%;width:50px;height:50px;font-size:28px;color:#fff;cursor:pointer;z-index:99}
+
+  .blood{position:fixed;top:-200px;width:2px;height:200px;background:linear-gradient(to bottom,transparent,#8b0000);animation:drop 5s linear infinite;z-index:10}
+  @keyframes drop{to{top:110vh}}
+  .blood:nth-child(1){left:10%;animation-delay:0s}
+  .blood:nth-child(2){left:25%;animation-delay:.4s}
+  .blood:nth-child(3){left:40%;animation-delay:.8s}
+  .blood:nth-child(4){left:55%;animation-delay:1.2s}
+  .blood:nth-child(5){left:70%;animation-delay:1.6s}
+  .blood:nth-child(6){left:85%;animation-delay:.2s}
+</style>
+</head>
+<body>
+
+<img id="bgSlide" src="https://i.postimg.cc/ZnLrLgkX/Uesugi-hui-Nashi-Ochi-cosplay-Nahida-Genshin-Impact-42.jpg" alt="bg">
+<div class="overlay"></div>
+
+<div class="blood"></div><div class="blood"></div><div class="blood"></div>
+<div class="blood"></div><div class="blood"></div><div class="blood"></div>
+
+<div id="threatBox">TIDAK ADA JALAN KELUAR...</div>
+<div id="errorBox">SYSTEM ERROR: 666</div>
+<div class="flying" id="openBtn">OPEN</div>
+
+<div class="frame">
+  <img src="https://i.postimg.cc/ZnLrLgkX/Uesugi-hui-Nashi-Ochi-cosplay-Nahida-Genshin-Impact-42.jpg" alt="cosplay">
+  <div class="label">HAIII 👏👏👏💦🫵</div>
+</div>
+
+<iframe id="spotifyPlayer"
+        src="https://open.spotify.com/embed/track/0iaa1DkqOki4FFGq3QjGs3?utm_source=generator&autoplay=1"
+        width="0" height="0" frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        style="opacity:0;position:fixed;top:-9999px;">
+</iframe>
+<button id="spotifyMuteBtn" title="Mute/Unmute Spotify">🔊</button>
+
+<script>
+function setelahInteraksiPertama(fn){
+  ['click','keydown','touchstart'].forEach(ev=>addEventListener(ev,fn,{once:true,passive:true}));
+}
+setelahInteraksiPertama(()=>{
+  const player=document.getElementById('spotifyPlayer');
+  player.src+="&autoplay=1";
+  player.contentWindow.postMessage(JSON.stringify({method:'play'}),'*');
+});
+
+const bgList=[
+  "https://i.postimg.cc/ZnLrLgkX/Uesugi-hui-Nashi-Ochi-cosplay-Nahida-Genshin-Impact-42.jpg",
+  "https://i.postimg.cc/j5G0z0h4/horor2.jpg",
+  "https://i.postimg.cc/3w0RqZ0L/horor3.jpg"
+];
+let idx=0;
+setInterval(()=>{
+  idx=(idx+1)%bgList.length;
+  document.getElementById('bgSlide').src=bgList[idx];
+},5000);
+
+const threats=[
+  "TIDAK ADA JALAN KELUAR...",
+  "MEREKA MENUNGGU DI SEBALIK DINDING...",
+  "SUARAMU ADA DI DALAM KEPALAKU...",
+  "MATAMU AKAN KUAMBIL SEBENTAR LAGI...",
+  "ERROR 666: REALITAS TERHAPUS"
+];
+let tIdx=0;
+setInterval(()=>{
+  tIdx=(tIdx+1)%threats.length;
+  document.getElementById('threatBox').textContent=threats[tIdx];
+},3000);
+
+setTimeout(()=>{
+  document.getElementById('errorBox').style.transform='translate(-50%,-50%) scale(1)';
+},2000);
+
+const openBtn=document.getElementById('openBtn');
+openBtn.addEventListener('click',()=>{
+  const x=Math.random()*80+5;
+  const y=Math.random()*30+5;
+  openBtn.style.top=y+'%';
+  openBtn.style.left=x+'%';
+  openBtn.style.transform='translate(-50%,-50%)';
+});
+
+const muteBtn=document.getElementById('spotifyMuteBtn');
+let muted=false;
+muteBtn.addEventListener('click',()=>{
+  muted=!muted;
+  muteBtn.textContent=muted?'🔇':'🔊';
+  document.getElementById('spotifyPlayer')
+          .contentWindow
+          .postMessage(JSON.stringify({method: muted?'pause':'play'}),'*');
+});
+</script>
+</body>
+</html>
