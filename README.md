@@ -1,141 +1,205 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>HOROR GATE</title>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-<style>
-  html,body{margin:0;height:100%;background:#000;font-family:'Creepster',cursive;color:#fff;overflow:hidden}
-  #bgSlide{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.7;transition:opacity 1s}
-  .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:-1}
+    <meta charset="UTF-8">
+    <title>Doncre_330</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap');
 
-  .frame{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:min(70vw, 360px);
-    border:6px solid #8b0000;
-    box-shadow:0 0 30px #8b0000,inset 0 0 30px rgba(139,0,0,.5);
-    animation:flicker 4s infinite;
-  }
-  .frame img{width:100%;display:block;filter:grayscale(80%) brightness(70%) contrast(120%)}
-  .label{margin-top:8px;text-align:center;font-size:clamp(18px,2.8vw,26px);letter-spacing:1px;color:#fff;text-shadow:0 0 8px #fff, 0 0 16px #8b0000}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            background:#000;
+            font-family:'Nosifer',cursive;
+            color:#8B0000;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            min-height:100vh;
+            overflow:hidden;
+            cursor:none;
+        }
 
-  #threatBox{
-    position:absolute;bottom:120px;left:50%;transform:translateX(-50%);
-    width:90%;max-width:500px;
-    text-align:center;
-    font-size:clamp(20px,3vw,28px);
-    color:#ff0000;
-    text-shadow:0 0 8px #ff0000;
-    animation:bloodFlicker 1.2s infinite;
-  }
-  @keyframes bloodFlicker{
-    0%,100%{opacity:1;text-shadow:0 0 8px #ff0000}
-    50%{opacity:.2;text-shadow:0 0 25px #ff0000}
-  }
+        #mainTitle{
+            font-size:4.5rem;
+            text-shadow:0 0 10px #ff0000,0 0 20px #ff0000;
+            animation:flicker 2s infinite;
+            cursor:pointer;
+            transition:.3s;
+        }
+        #mainTitle:hover{transform:scale(1.1)}
 
-  #errorBox{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
-    font-size:clamp(28px,4vw,42px);
-    color:#ff0000;
-    text-shadow:0 0 10px #ff0000;
-    transition:transform .2s ease;
-    z-index:9999;
-  }
+        @keyframes flicker{
+            0%,19%,21%,23%,25%,54%,56%,100%{opacity:1}
+            20%,24%,55%{opacity:.4}
+        }
 
-  .flying{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:50px;letter-spacing:4px;color:#8b0000;text-shadow:0 0 10px #ff0000;cursor:pointer;transition:.1s linear;z-index:15}
+        #circularFrame{
+            width:260px;
+            height:260px;
+            border-radius:50%;
+            border:5px solid #8B0000;
+            margin:40px 0;
+            overflow:hidden;
+            box-shadow:0 0 30px #ff0000,inset 0 0 30px #000;
+            animation:rotate 10s linear infinite;
+            cursor:pointer;
+            transition:.5s;
+        }
+        #circularFrame:hover{transform:scale(1.1)}
+        @keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-  #spotifyMuteBtn{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);border:0;border-radius:50%;width:50px;height:50px;font-size:28px;color:#fff;cursor:pointer;z-index:99}
+        #circularFrame img{
+            width:100%;height:100%;object-fit:cover;
+            filter:grayscale(100%) brightness(30%) contrast(200%);
+        }
 
-  .blood{position:fixed;top:-200px;width:2px;height:200px;background:linear-gradient(to bottom,transparent,#8b0000);animation:drop 5s linear infinite;z-index:10}
-  @keyframes drop{to{top:110vh}}
-  .blood:nth-child(1){left:10%;animation-delay:0s}
-  .blood:nth-child(2){left:25%;animation-delay:.4s}
-  .blood:nth-child(3){left:40%;animation-delay:.8s}
-  .blood:nth-child(4){left:55%;animation-delay:1.2s}
-  .blood:nth-child(5){left:70%;animation-delay:1.6s}
-  .blood:nth-child(6){left:85%;animation-delay:.2s}
-</style>
+        #horrorText{
+            max-width:600px;
+            text-align:center;
+            font-size:1.4rem;
+            line-height:1.6;
+            animation:blueWhite 2.5s infinite;
+            padding:0 20px;
+        }
+        @keyframes blueWhite{
+            0%{text-shadow:0 0 8px #00f,0 0 16px #00f;color:#00f}
+            50%{text-shadow:0 0 8px #fff,0 0 16px #fff;color:#fff}
+            100%{text-shadow:0 0 8px #00f,0 0 16px #00f;color:#00f}
+        }
+
+        /* tombol Hai */
+        #haiBtn{
+            margin-top:20px;
+            padding:10px 30px;
+            font-size:1.2rem;
+            font-family:'Nosifer',cursive;
+            background:#000;
+            color:#fff;
+            border:2px solid #8B0000;
+            cursor:pointer;
+            transition:.3s;
+            animation:btnPulse 2s infinite;
+        }
+        #haiBtn:hover{background:#8B0000;color:#000}
+        @keyframes btnPulse{
+            0%,100%{box-shadow:0 0 5px #8B0000}
+            50%{box-shadow:0 0 20px #8B0000}
+        }
+
+        #errorScreen,#hiddenMessage{display:none;position:fixed;inset:0;z-index:9999}
+        #errorScreen{background:#000;animation:glitch .5s infinite}
+        @keyframes glitch{
+            0%{transform:translate(2px,1px) rotate(0deg)}
+            25%{transform:translate(-2px,-1px) rotate(-1deg)}
+            50%{transform:translate(1px,-2px) rotate(1deg)}
+            75%{transform:translate(-1px,2px) rotate(0deg)}
+            100%{transform:translate(1px,-1px) rotate(-1deg)}
+        }
+
+        #hiddenMessage{
+            top:50%;left:50%;
+            transform:translate(-50%,-50%);
+            font-size:3rem;
+            color:#fff;
+            text-shadow:0 0 10px #f00,0 0 20px #00f;
+            animation:flash .6s infinite;
+        }
+        @keyframes flash{
+            0%,100%{color:#f00;text-shadow:0 0 10px #f00}
+            33%{color:#00f;text-shadow:0 0 10px #00f}
+            66%{color:#fff;text-shadow:0 0 10px #fff}
+        }
+
+        .bloodDrip{
+            position:absolute;
+            width:2px;height:100px;
+            background:linear-gradient(to bottom,transparent,#8B0000);
+            animation:dripDown 3s linear infinite;
+        }
+        @keyframes dripDown{to{transform:translateY(100vh)}}
+
+        .cursor-trail{
+            position:fixed;
+            width:16px;height:16px;
+            background:#8B0000;
+            border-radius:50%;
+            pointer-events:none;
+            animation:fadeOut 1s forwards;
+        }
+        @keyframes fadeOut{to{opacity:0;transform:scale(0)}}
+    </style>
 </head>
 <body>
+    <h1 id="mainTitle">Doncre_330</h1>
 
-<img id="bgSlide" src="https://i.postimg.cc/ZnLrLgkX/Uesugi-hui-Nashi-Ochi-cosplay-Nahida-Genshin-Impact-42.jpg" alt="bg">
-<div class="overlay"></div>
+    <div id="circularFrame">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23000'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%238B0000' font-family='Nosifer' font-size='20'%3EMEREKA MENGAWASIMU%3C/text%3E%3C/svg%3E" alt="Horror Image">
+    </div>
 
-<div class="blood"></div><div class="blood"></div><div class="blood"></div>
-<div class="blood"></div><div class="blood"></div><div class="blood"></div>
+    <div id="horrorText">
+        Setiap malam, aku mendengar mereka...<br>
+        Menangis di balik cermin...<br>
+        Menunggumu untuk bergabung...
+    </div>
 
-<div id="threatBox">TIDAK ADA JALAN KELUAR...</div>
-<div id="errorBox">SYSTEM ERROR: 666</div>
-<div class="flying" id="openBtn">OPEN</div>
+    <!-- Tombol Hai -->
+    <button id="haiBtn">Hai</button>
 
-<div class="frame">
-  <img src="https://i.postimg.cc/ZnLrLgkX/Uesugi-hui-Nashi-Ochi-cosplay-Nahida-Genshin-Impact-42.jpg" alt="cosplay">
-  <div class="label">HAIII 👏👏👏💦🫵</div>
-</div>
+    <!-- Audio memang tetap hidden, tapi bisa dipicu tombol -->
+    <audio id="horrorSound" loop>
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT" type="audio/wav">
+    </audio>
 
-<iframe id="spotifyPlayer"
-        src="https://open.spotify.com/embed/track/0iaa1DkqOki4FFGq3QjGs3?utm_source=generator&autoplay=1"
-        width="0" height="0" frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        style="opacity:0;position:fixed;top:-9999px;">
-</iframe>
-<button id="spotifyMuteBtn" title="Mute/Unmute Spotify">🔊</button>
+    <div id="errorScreen"></div>
+    <div id="hiddenMessage">KAMU TIDAK AKAN PERNAH KELUAR</div>
 
-<script>
-function setelahInteraksiPertama(fn){
-  ['click','keydown','touchstart'].forEach(ev=>addEventListener(ev,fn,{once:true,passive:true}));
-}
-setelahInteraksiPertama(()=>{
-  const player=document.getElementById('spotifyPlayer');
-  player.src+="&autoplay=1";
-  player.contentWindow.postMessage(JSON.stringify({method:'play'}),'*');
-});
+    <script>
+        // Fungsi trigger error
+        function showError(){
+            // mainkan suara
+            document.getElementById('horrorSound').play().catch(()=>{});
+            const es=document.getElementById('errorScreen');
+            es.style.display='block';
+            const img=new Image();
+            img.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="500"%3E%3Crect width="500" height="500" fill="%23000"/%3E%3Ccircle cx="150" cy="200" r="30" fill="%23fff"/%3E%3Ccircle cx="350" cy="200" r="30" fill="%23fff"/%3E%3Cpath d="M 100 350 Q 250 450 400 350" stroke="%23fff" stroke-width="8" fill="none"/%3E%3C/svg%3E';
+            img.style.position='fixed';img.style.top='50%';img.style.left='50%';
+            img.style.transform='translate(-50%,-50%)';
+            es.appendChild(img);
+            setTimeout(()=>{es.style.display='none';es.innerHTML='';},3000);
+        }
 
-const bgList=[
-  "https://i.postimg.cc/ZnLrLgkX/Uesugi-hui-Nashi-Ochi-cosplay-Nahida-Genshin-Impact-42.jpg",
-  "https://i.postimg.cc/j5G0z0h4/horor2.jpg",
-  "https://i.postimg.cc/3w0RqZ0L/horor3.jpg"
-];
-let idx=0;
-setInterval(()=>{
-  idx=(idx+1)%bgList.length;
-  document.getElementById('bgSlide').src=bgList[idx];
-},5000);
+        // Event tombol Hai
+        document.getElementById('haiBtn').addEventListener('click',showError);
 
-const threats=[
-  "TIDAK ADA JALAN KELUAR...",
-  "MEREKA MENUNGGU DI SEBALIK DINDING...",
-  "SUARAMU ADA DI DALAM KEPALAKU...",
-  "MATAMU AKAN KUAMBIL SEBENTAR LAGI...",
-  "ERROR 666: REALITAS TERHAPUS"
-];
-let tIdx=0;
-setInterval(()=>{
-  tIdx=(tIdx+1)%threats.length;
-  document.getElementById('threatBox').textContent=threats[tIdx];
-},3000);
+        // Event lain
+        window.addEventListener('load',()=>{
+            // Blood drips
+            for(let i=0;i<15;i++){
+                const d=document.createElement('div');
+                d.className='bloodDrip';
+                d.style.left=Math.random()*100+'vw';
+                d.style.animationDelay=Math.random()*3+'s';
+                document.body.appendChild(d);
+            }
+        });
 
-setTimeout(()=>{
-  document.getElementById('errorBox').style.transform='translate(-50%,-50%) scale(1)';
-},2000);
+        document.getElementById('mainTitle').addEventListener('click',showError);
+        document.getElementById('circularFrame').addEventListener('click',()=>{
+            const hm=document.getElementById('hiddenMessage');
+            hm.style.display='block';
+            setTimeout(()=>hm.style.display='none',2000);
+        });
 
-const openBtn=document.getElementById('openBtn');
-openBtn.addEventListener('click',()=>{
-  const x=Math.random()*80+5;
-  const y=Math.random()*30+5;
-  openBtn.style.top=y+'%';
-  openBtn.style.left=x+'%';
-  openBtn.style.transform='translate(-50%,-50%)';
-});
-
-const muteBtn=document.getElementById('spotifyMuteBtn');
-let muted=false;
-muteBtn.addEventListener('click',()=>{
-  muted=!muted;
-  muteBtn.textContent=muted?'🔇':'🔊';
-  document.getElementById('spotifyPlayer')
-          .contentWindow
-          .postMessage(JSON.stringify({method: muted?'pause':'play'}),'*');
-});
-</script>
+        // Cursor trail
+        document.addEventListener('mousemove',e=>{
+            const t=document.createElement('div');
+            t.className='cursor-trail';
+            t.style.left=e.clientX-8+'px';
+            t.style.top=e.clientY-8+'px';
+            document.body.appendChild(t);
+            setTimeout(()=>t.remove(),1000);
+        });
+    </script>
 </body>
 </html>
